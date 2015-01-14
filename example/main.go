@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	param := *SearchParam{}
+	param := &gtnd.SearchParam{"golang"}
 	result, err := gtnd.Search(param)
 	if err != nil {
 		fmt.Println(err)

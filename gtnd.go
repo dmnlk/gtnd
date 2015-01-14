@@ -14,7 +14,7 @@ const (
 func Search(parameter *SearchParam) (*SearchResult, error) {
 
 	param := url.Values{}
-	param.Add("keyword", parameter.keyword[0])
+	param.Add("keyword", parameter.Keyword)
 	param.Add("format", "json")
 
 	resp, err := http.Get(URL + "?" + param.Encode())
