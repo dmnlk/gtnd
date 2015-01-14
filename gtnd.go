@@ -11,9 +11,10 @@ const (
 	URL = "http://api.atnd.org/events/"
 )
 
-func Search(keyword string) (*SearchResult, error) {
+func Search(parameter *SearchParam) (*SearchResult, error) {
+
 	param := url.Values{}
-	param.Add("keyword", keyword)
+	param.Add("keyword", parameter.keyword[0])
 	param.Add("format", "json")
 
 	resp, err := http.Get(URL + "?" + param.Encode())
