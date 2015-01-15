@@ -5,6 +5,9 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"reflect"
+	"github.com/google/go-querystring/query"
+	"github.com/k0kubun/pp"
 )
 
 const (
@@ -12,7 +15,8 @@ const (
 )
 
 func Search(parameter *SearchParam) (*SearchResult, error) {
-
+	a, _ := addOptions(URL, parameter)
+	pp.Print(a)
 	param := url.Values{}
 	param.Add("keyword", parameter.Keyword)
 	param.Add("format", "json")
@@ -32,4 +36,22 @@ func Search(parameter *SearchParam) (*SearchResult, error) {
 		return nil, err
 	}
 	return result, nil
+}
+
+func addOptions(r string, opt interface{}) (string, error) {
+	v := reflect.ValueOf(opt)
+	if v.Kind() == reflect.Ptr && v.IsNil() {
+		return r, nil
+	}
+	u, err := url.Parse(r)
+	if err != nil {
+		return r, err
+	}
+
+	qs, err := query.Values(opt)
+	if err != nil {
+		return r, err
+	}
+	u.RawQuery = qs.Encode()
+	return u.String(), nil
 }
