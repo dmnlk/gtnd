@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+
 	"github.com/google/go-querystring/query"
-	"github.com/k0kubun/pp"
 )
 
 const (
@@ -16,12 +16,12 @@ const (
 
 func Search(parameter *SearchParam) (*SearchResult, error) {
 	a, _ := addOptions(URL, parameter)
-	pp.Print(a)
-	param := url.Values{}
-	param.Add("keyword", parameter.Keyword)
-	param.Add("format", "json")
+	//	pp.Print(a)
+	//	param := url.Values{}
+	//	param.Add("keyword", parameter.Keyword)
+	//	param.Add("format", "json")
 
-	resp, err := http.Get(URL + "?" + param.Encode())
+	resp, err := http.Get(a)
 	if err != nil {
 		return nil, err
 	}
