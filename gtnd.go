@@ -14,7 +14,7 @@ const (
 	URL = "http://api.atnd.org/events/"
 )
 
-func Search(parameter *SearchParam) (*SearchResult, error) {
+func Search(parameter SearchParam) (*SearchResult, error) {
 	a, _ := addOptions(URL, parameter)
 	//	pp.Print(a)
 	//	param := url.Values{}
