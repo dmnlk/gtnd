@@ -15,7 +15,10 @@ const (
 )
 
 func Search(parameter SearchParam) (*SearchResult, error) {
-	a, _ := addOptions(URL, parameter)
+	a, err := addOptions(URL, parameter)
+	if err != nil {
+		return nil, err
+	}
 	//	pp.Print(a)
 	//	param := url.Values{}
 	//	param.Add("keyword", parameter.Keyword)
