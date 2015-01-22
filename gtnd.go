@@ -7,6 +7,8 @@ import (
 	"net/url"
 	"reflect"
 
+	"strings"
+
 	"github.com/google/go-querystring/query"
 )
 
@@ -19,10 +21,6 @@ func Search(parameter SearchParam) (*SearchResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	//	pp.Print(a)
-	//	param := url.Values{}
-	//	param.Add("keyword", parameter.Keyword)
-	//	param.Add("format", "json")
 
 	resp, err := http.Get(a)
 	if err != nil {
@@ -56,5 +54,5 @@ func addOptions(r string, opt interface{}) (string, error) {
 		return r, err
 	}
 	u.RawQuery = qs.Encode()
-	return u.String(), nil
+	return strings.ToLower(u.String()), nil
 }
