@@ -5,5 +5,5 @@ import (
 )
 
 func TestSearch(t *testing) {
-	
+	param := SearchParam{};
 }
